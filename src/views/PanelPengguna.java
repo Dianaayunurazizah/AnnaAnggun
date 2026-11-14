@@ -57,7 +57,7 @@ public class PanelPengguna extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         lblSelamatDatang = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        tID = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -111,7 +111,8 @@ public class PanelPengguna extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Kelola akun dan hak akses aplikasi ");
 
-        jLabel3.setText("jLabel3");
+        tID.setForeground(new java.awt.Color(240, 243, 247));
+        tID.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -126,7 +127,7 @@ public class PanelPengguna extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblSelamatDatang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
+                        .addComponent(tID)
                         .addGap(22, 22, 22))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -135,7 +136,7 @@ public class PanelPengguna extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSelamatDatang)
-                    .addComponent(jLabel3))
+                    .addComponent(tID))
                 .addGap(0, 0, 0)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -356,12 +357,14 @@ public class PanelPengguna extends javax.swing.JPanel {
         bUbah.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BoxiconsPencil.png"))); // NOI18N
         bUbah.setText("Ubah");
+        bUbah.addActionListener(this::bUbahActionPerformed);
 
         bHapus.setBackground(new java.awt.Color(255, 204, 204));
         bHapus.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bHapus.setForeground(new java.awt.Color(255, 0, 51));
         bHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/EpDelete.png"))); // NOI18N
         bHapus.setText("Hapus");
+        bHapus.addActionListener(this::bHapusActionPerformed);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -475,6 +478,44 @@ public class PanelPengguna extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_bSimpanActionPerformed
 
+    private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
+        // TODO add your handling code here:
+        modelPengguna pengguna = new modelPengguna(
+        tID.getText(),
+        tNama.getText(),
+        tUser.getText(),
+        tPassword.getText(),
+        cRole.getSelectedItem().toString()
+        );
+        
+        boolean simpan = pengguna.ubah();
+        if(simpan==true){
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diubah");
+        }else {
+            JOptionPane.showMessageDialog(null, "Data Gagal Diubah");
+        }
+        loadTable();
+    }//GEN-LAST:event_bUbahActionPerformed
+
+    private void bHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHapusActionPerformed
+        // TODO add your handling code here:
+        modelPengguna pengguna = new modelPengguna(
+              tID.getText(),
+              tNama.getText(),
+              tUser.getText(),
+              tPassword.getText(),
+              cRole.getSelectedItem().toString()
+        );
+        
+        boolean simpan = pengguna.hapus();
+        if(simpan==true){
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
+        }else {
+            JOptionPane.showMessageDialog(null, "data Gagal Dihapus");
+        }
+        loadTable();
+    }//GEN-LAST:event_bHapusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bHapus;
@@ -490,7 +531,6 @@ public class PanelPengguna extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -511,6 +551,7 @@ public class PanelPengguna extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblSelamatDatang;
     private javax.swing.JLabel lblSelamatDatang5;
+    private javax.swing.JLabel tID;
     private javax.swing.JTextField tNama;
     private javax.swing.JPasswordField tPassword;
     private javax.swing.JTable tPengguna;
