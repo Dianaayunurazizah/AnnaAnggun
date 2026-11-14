@@ -4,7 +4,6 @@
  */
 package views;
 
-import com.mysql.cj.callback.UsernameCallback;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
