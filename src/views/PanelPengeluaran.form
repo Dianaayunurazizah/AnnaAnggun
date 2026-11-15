@@ -284,20 +284,12 @@
                         <Property name="text" type="java.lang.String" value="Tanggal"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel2">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Plus Jakarta Display" size="12" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Kategori"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Plus Jakarta Display" size="12" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Jumlah"/>
+                        <Property name="text" type="java.lang.String" value="Nominal"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -329,21 +321,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="com.toedter.calendar.JDateChooser" name="tTanggal">
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cKategori">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tNominal">
                     </Component>
@@ -397,33 +374,27 @@
                 <Component class="javax.swing.JTable" name="tPengeluaran">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="5">
+                      <Table columnCount="3" rowCount="5">
                         <Column editable="false" title="TANGGAL" type="java.lang.Object"/>
-                        <Column editable="false" title="KATEGORI" type="java.lang.Object"/>
                         <Column editable="true" title="KETERANGAN" type="java.lang.Object"/>
-                        <Column editable="true" title="JUMLAH" type="java.lang.Object"/>
+                        <Column editable="true" title="NOMINAL" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="autoResizeMode" type="int" value="4"/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="TANGGAL"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="KATEGORI"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="KETERANGAN"/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title value="JUMLAH"/>
+                          <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>

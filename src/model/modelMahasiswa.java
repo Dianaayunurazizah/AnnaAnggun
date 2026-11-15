@@ -64,7 +64,7 @@ public class modelMahasiswa {
     public boolean tambah() {
         String sql = "INSERT INTO mahasiswa "
                 + "(nim, nama, noHp, status) "
-                + "VALUES (?,?)";
+                + "VALUES (?,?,?,?)";
         
         try{
             Connection conn = koneksi.getConnection();

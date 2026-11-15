@@ -31,11 +31,11 @@ public class PanelPengeluaran extends javax.swing.JPanel {
     void loadTable() {
         DefaultTableModel tabel = new DefaultTableModel();
         tabel.addColumn("ID Pengeluaran");
+        tabel.addColumn("Nominal");
         tabel.addColumn("Tanggal");
-        tabel.addColumn("Kategori");
         tabel.addColumn("Keterangan");
         tabel.addColumn("ID Pengguna");
-        tabel.addColumn("Nominal");
+        
 
         modelPengeluaran pengeluaran = new modelPengeluaran();
         List<modelPengeluaran> daftar = pengeluaran.tampilSemua();
@@ -76,12 +76,10 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         tTanggal = new com.toedter.calendar.JDateChooser();
-        cKategori = new javax.swing.JComboBox<>();
         tNominal = new javax.swing.JTextField();
         tKeterangan = new javax.swing.JTextField();
         panelRiwayatPengeluaran = new javax.swing.JPanel();
@@ -178,12 +176,8 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         jLabel1.setText("Tanggal");
         jPanel2.add(jLabel1);
 
-        jLabel2.setFont(new java.awt.Font("Plus Jakarta Display", 0, 12)); // NOI18N
-        jLabel2.setText("Kategori");
-        jPanel2.add(jLabel2);
-
         jLabel3.setFont(new java.awt.Font("Plus Jakarta Display", 0, 12)); // NOI18N
-        jLabel3.setText("Jumlah");
+        jLabel3.setText("Nominal");
         jPanel2.add(jLabel3);
 
         jLabel4.setFont(new java.awt.Font("Plus Jakarta Display", 0, 12)); // NOI18N
@@ -195,9 +189,6 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
         jPanel3.add(tTanggal);
-
-        cKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cKategori);
         jPanel3.add(tNominal);
         jPanel3.add(tKeterangan);
 
@@ -216,18 +207,18 @@ public class PanelPengeluaran extends javax.swing.JPanel {
 
         tPengeluaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "TANGGAL", "KATEGORI", "KETERANGAN", "JUMLAH"
+                "TANGGAL", "KETERANGAN", "NOMINAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,12 +228,6 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         tPengeluaran.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tPengeluaran.setRowHeight(40);
         jScrollPane1.setViewportView(tPengeluaran);
-        if (tPengeluaran.getColumnModel().getColumnCount() > 0) {
-            tPengeluaran.getColumnModel().getColumn(0).setHeaderValue("TANGGAL");
-            tPengeluaran.getColumnModel().getColumn(1).setHeaderValue("KATEGORI");
-            tPengeluaran.getColumnModel().getColumn(2).setHeaderValue("KETERANGAN");
-            tPengeluaran.getColumnModel().getColumn(3).setHeaderValue("JUMLAH");
-        }
 
         panelRiwayatPengeluaran.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -282,7 +267,7 @@ public class PanelPengeluaran extends javax.swing.JPanel {
                 Integer.parseInt(tNominal.getText()),
                 tanggal,
                 tKeterangan.getText(),
-                cKategori.getSelectedItem().toString()
+                ""
         );
         boolean simpan = pengeluaran.tambah();
         if (simpan == true) {
@@ -298,9 +283,14 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         if(tID.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Pilih data pada tabel dahulu!");
         }
-        modelPengeluaran pengeluaran = new modelPengeluaran();
-        pengeluaran.setIdPengeluaran(tID.getText());        
-
+        String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(tTanggal.getDate());
+        modelPengeluaran pengeluaran = new modelPengeluaran(
+            tID.getText(),     
+            Integer.parseInt(tNominal.getText()),
+            tanggal,
+            tKeterangan.getText(),
+        ""
+        );       
         boolean hapus = pengeluaran.hapus();
         if (hapus == true) {
             JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
@@ -324,11 +314,11 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         
         String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(tTanggal.getDate());
         modelPengeluaran pengeluaran = new modelPengeluaran(
-        tID.getText(),
-        Integer.parseInt(tNominal.getText()),
-        tanggal,
-        cKategori.getSelectedItem().toString(),
-        tKeterangan.getText()
+            tID.getText(),
+            Integer.parseInt(tNominal.getText()),
+            tanggal,
+            tKeterangan.getText(),
+            ""
         );
         
         boolean simpan = pengeluaran.ubah();
@@ -345,9 +335,7 @@ public class PanelPengeluaran extends javax.swing.JPanel {
     private javax.swing.JButton bHapus;
     private javax.swing.JButton bSimpan;
     private javax.swing.JButton bUbah;
-    private javax.swing.JComboBox<String> cKategori;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
