@@ -17,14 +17,16 @@ import java.util.List;
  * @author Acer
  */
 public class modelMahasiswa {
-    private String nim, nama;
+    private String nim, nama, noHp, status;
 
     public modelMahasiswa() {
     }
 
-    public modelMahasiswa(String nim, String nama) {
+    public modelMahasiswa(String nim, String nama, String noHp, String status) {
         this.nim = nim;
         this.nama = nama;
+        this.noHp = noHp;
+        this.status = status;
     }
 
     public void setNim(String nim) {
@@ -35,6 +37,14 @@ public class modelMahasiswa {
         this.nama = nama;
     }
 
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getNim() {
         return nim;
     }
@@ -42,10 +52,18 @@ public class modelMahasiswa {
     public String getNama() {
         return nama;
     }
+
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public String getStatus() {
+        return status;
+    }
     
     public boolean tambah() {
         String sql = "INSERT INTO mahasiswa "
-                + "(nim, nama) "
+                + "(nim, nama, noHp, status) "
                 + "VALUES (?,?)";
         
         try{
@@ -54,6 +72,8 @@ public class modelMahasiswa {
             
             ps.setString(1, nim);
             ps.setString(2, nama);
+            ps.setString(3, noHp);
+            ps.setString(4, status);
 
             return ps.executeUpdate() > 0;
             
@@ -64,14 +84,16 @@ public class modelMahasiswa {
     
     public boolean ubah() {
         String sql = "UPDATE mahasiswa SET "
-                + "nama = ? WHERE nim = ?";
+                + "nama = ?, no_hp = ?, status = ? WHERE nim = ?";
         
         try{
             Connection conn = koneksi.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             
             ps.setString(1, nama);
-            ps.setString(2, nim);
+            ps.setString(2, noHp );
+            ps.setString(3, status );
+            ps.setString(4, nim);
             
             return ps.executeUpdate() > 0;
             
@@ -109,7 +131,9 @@ public class modelMahasiswa {
             while (rs.next()) {
                 modelMahasiswa mhs = new modelMahasiswa(
                         rs.getString("nim"),
-                        rs.getString("nama")
+                        rs.getString("nama"),
+                        rs.getString("noHp"),
+                        rs.getString("status")
                 );
                 
                 daftar.add(mhs);

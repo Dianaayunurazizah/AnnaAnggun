@@ -511,7 +511,7 @@ public class PanelPengguna extends javax.swing.JPanel {
         if(simpan==true){
             JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
         }else {
-            JOptionPane.showMessageDialog(null, "data Gagal Dihapus");
+            JOptionPane.showMessageDialog(null, "Data Gagal Dihapus");
         }
         loadTable();
     }//GEN-LAST:event_bHapusActionPerformed

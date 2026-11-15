@@ -28,7 +28,7 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         tID.setText("");
         loadTable();
     }
- void loadTable(){
+    void loadTable() {
         DefaultTableModel tabel = new DefaultTableModel();
         tabel.addColumn("ID Pengeluaran");
         tabel.addColumn("Tanggal");
@@ -36,18 +36,17 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         tabel.addColumn("Keterangan");
         tabel.addColumn("ID Pengguna");
         tabel.addColumn("Nominal");
-        
+
         modelPengeluaran pengeluaran = new modelPengeluaran();
         List<modelPengeluaran> daftar = pengeluaran.tampilSemua();
-        
-        for(int i=0; i<daftar.size(); i++){
+
+        for (int i = 0; i < daftar.size(); i++) {
             String id = daftar.get(i).getIdPengeluaran();
             String nominal = String.valueOf(daftar.get(i).getNominal());
             String tanggal = daftar.get(i).getTanggal();
             String keterangan = daftar.get(i).getKeterangan();
             String idPengguna = daftar.get(i).getIdPengguna();
-            
-            
+
             Object[] baris = {id, nominal, tanggal, keterangan, idPengguna};
             tabel.addRow(baris);
         }
@@ -306,7 +305,7 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         if (hapus == true) {
             JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
         } else {
-            JOptionPane.showMessageDialog(null, "data Gagal Dihapus");
+            JOptionPane.showMessageDialog(null, "Data Gagal Dihapus");
         }
         loadTable();
     }//GEN-LAST:event_bHapusActionPerformed
