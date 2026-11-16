@@ -63,7 +63,7 @@ public class modelMahasiswa {
     
     public boolean tambah() {
         String sql = "INSERT INTO mahasiswa "
-                + "(nim, nama, noHp, status) "
+                + "(nim, nama, no_hp, status) "
                 + "VALUES (?,?,?,?)";
         
         try{
@@ -132,7 +132,7 @@ public class modelMahasiswa {
                 modelMahasiswa mhs = new modelMahasiswa(
                         rs.getString("nim"),
                         rs.getString("nama"),
-                        rs.getString("noHp"),
+                        rs.getString("no_hp"),
                         rs.getString("status")
                 );
                 
