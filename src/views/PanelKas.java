@@ -4,6 +4,8 @@
  */
 package views;
 
+import com.toedter.calendar.JDateChooser;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -407,6 +409,11 @@ public class PanelKas extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tKas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tKasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tKas);
 
         jPanel16.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -493,7 +500,7 @@ public class PanelKas extends javax.swing.JPanel {
             return;
         }
         String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dcTanggal.getDate());
-        int nominal = Integer.parseInt(tNominal.getText());
+        int nominal = Integer.parseInt(tNominal.getText().replaceAll("[^0-9]", ""));
         
         
         //nominal 10000 ke atas = lunas, kurang dari itu = cicil
@@ -510,11 +517,11 @@ public class PanelKas extends javax.swing.JPanel {
         
         modelPembayaranKas kas = new modelPembayaranKas(
                 "",
-        tanggal,
-        nominal,
-        status,
-        "",
-        nim
+                tanggal,
+                nominal,
+                status,
+                "",
+                nim
                 );
         
         boolean simpan = kas.tambah();
@@ -535,6 +542,25 @@ public class PanelKas extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tKasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKasMouseClicked
+        // TODO add your handling code here:
+        int baris = tKas.getSelectedRow();
+        
+        String mahasiswa = tKas.getValueAt(baris, 0).toString();
+        String tanggal = tKas.getValueAt(baris, 1).toString();
+        String nominal = tKas.getValueAt(baris, 2).toString();
+        
+        cMahasiswa.setSelectedItem(mahasiswa);
+        tNominal.setText(nominal);
+        
+        try {
+            dcTanggal.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
+        } catch (ParseException e) {
+            dcTanggal.setDate(null);
+        }
+           
+    }//GEN-LAST:event_tKasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
