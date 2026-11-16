@@ -4,6 +4,13 @@
  */
 package views;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.modelMahasiswa;
+import model.modelPembayaranKas;
+
 /**
  *
  * @author Al
@@ -15,6 +22,35 @@ public class PanelKas extends javax.swing.JPanel {
      */
     public PanelKas() {
         initComponents();
+        
+        List<modelMahasiswa> mhs = new modelMahasiswa().tampilSemua();
+        cMahasiswa.removeAllItems();
+        for (int i = 0; i < mhs.size(); i++) {
+            cMahasiswa.addItem(mhs.get(i).getNama());     
+        }
+        loadTable();
+    }
+    
+    void loadTable(){
+        DefaultTableModel tabel = new DefaultTableModel();
+        tabel.addColumn("Mahasiswa");
+        tabel.addColumn("Tanggal");
+        tabel.addColumn("Nominal");
+        tabel.addColumn("Status");
+        
+        modelPembayaranKas kas = new modelPembayaranKas();
+        List<modelPembayaranKas> daftar = kas.tampilSemua();
+        
+        for (int i = 0; i < daftar.size(); i++) {
+            String mahasiswa = daftar.get(i).getNim();
+            String tanggal = daftar.get(i).getTanggal();
+            String nominal = String.valueOf(daftar.get(i).getJumlahBayar());
+            String status = daftar.get(i).getStatus();
+            
+           Object[] baris = {mahasiswa, tanggal, nominal, status};
+           tabel.addRow(baris);
+        }
+        tKas.setModel(tabel);
     }
 
     /**
@@ -56,16 +92,16 @@ public class PanelKas extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        cMahasiswa = new javax.swing.JComboBox<>();
+        tNominal = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        dcTanggal = new com.toedter.calendar.JDateChooser();
+        bBayar = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tKas = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -270,20 +306,20 @@ public class PanelKas extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(204, 204, 204));
         jLabel14.setText("Nominal ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dedi Kurnia " }));
+        cMahasiswa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dedi Kurnia " }));
 
-        jTextField1.setText("Rp 10.000");
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        tNominal.setText("Rp 10.000");
+        tNominal.addActionListener(this::tNominalActionPerformed);
 
         jLabel15.setForeground(new java.awt.Color(204, 204, 204));
         jLabel15.setText("Tanggal Bayar ");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ProiconsCheckmarkCircle (1).png"))); // NOI18N
-        jButton1.setText("Bayar Sekarang ");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        bBayar.setBackground(new java.awt.Color(0, 102, 255));
+        bBayar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bBayar.setForeground(new java.awt.Color(255, 255, 255));
+        bBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ProiconsCheckmarkCircle (1).png"))); // NOI18N
+        bBayar.setText("Bayar Sekarang ");
+        bBayar.addActionListener(this::bBayarActionPerformed);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -299,11 +335,11 @@ public class PanelKas extends javax.swing.JPanel {
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(cMahasiswa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tNominal)
                             .addComponent(jLabel15)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dcTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -319,17 +355,17 @@ public class PanelKas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cMahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tNominal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dcTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -360,7 +396,7 @@ public class PanelKas extends javax.swing.JPanel {
         jLabel16.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanel16.add(jLabel16, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tKas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -371,7 +407,7 @@ public class PanelKas extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tKas);
 
         jPanel16.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -450,13 +486,51 @@ public class PanelKas extends javax.swing.JPanel {
         add(jPanel1, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBayarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (dcTanggal.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Tanggal belum dipilih");
+            return;
+        }
+        String tanggal = new SimpleDateFormat("yyyy-MM-dd").format(dcTanggal.getDate());
+        int nominal = Integer.parseInt(tNominal.getText());
+        
+        
+        //nominal 10000 ke atas = lunas, kurang dari itu = cicil
+        String status;
+        if (nominal >= 10000){
+            status = "lunas";
+        }else {
+            status = "cicil";
+        }
+        
+        //NIM  diambil dari mahasiswa yang dipilih di combo box
+        List<modelMahasiswa> mhs = new modelMahasiswa().tampilSemua();
+        String nim = mhs.get(cMahasiswa.getSelectedIndex()).getNim();
+        
+        modelPembayaranKas kas = new modelPembayaranKas(
+                "",
+        tanggal,
+        nominal,
+        status,
+        "",
+        nim
+                );
+        
+        boolean simpan = kas.tambah();
+        if (simpan == true) {
+            JOptionPane.showMessageDialog(this, "Data berhasil Disimpan");
+        }else{
+            JOptionPane.showMessageDialog(this, "Data gagal Disimpan");
+        }
+        loadTable();
+        tNominal.setText("Rp 10.000");
+        dcTanggal.setDate(null);
+    }//GEN-LAST:event_bBayarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tNominalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNominalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tNominalActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -464,11 +538,11 @@ public class PanelKas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bBayar;
+    private javax.swing.JComboBox<String> cMahasiswa;
+    private com.toedter.calendar.JDateChooser dcTanggal;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -506,8 +580,8 @@ public class PanelKas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblSelamatDatang;
+    private javax.swing.JTable tKas;
+    private javax.swing.JTextField tNominal;
     // End of variables declaration//GEN-END:variables
 }
