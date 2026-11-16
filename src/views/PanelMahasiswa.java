@@ -4,11 +4,13 @@
  */
 package views;
 
+import com.sun.jdi.request.ThreadStartRequest;
 import java.util.UUID;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.modelMahasiswa;
+import model.modelPengguna;
 
 
 /**
@@ -417,6 +419,11 @@ public class PanelMahasiswa extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tMahasiswa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tMahasiswaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tMahasiswa);
 
         jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -477,6 +484,21 @@ public class PanelMahasiswa extends javax.swing.JPanel {
         }
         loadTable();
     }//GEN-LAST:event_bHapusActionPerformed
+
+    private void tMahasiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tMahasiswaMouseClicked
+        // TODO add your handling code here:
+        int baris = tMahasiswa.getSelectedRow();
+
+        String nim = tMahasiswa.getValueAt(baris, 0).toString();
+        String nama = tMahasiswa.getValueAt(baris, 1).toString();
+        String noHp = tMahasiswa.getValueAt(baris, 2).toString();
+        String status = tMahasiswa.getValueAt(baris, 3).toString();
+
+        tNim.setText(nim);
+        tNama.setText(nama);
+        tHp.setText(noHp);
+        cStatus.setSelectedItem(status);
+    }//GEN-LAST:event_tMahasiswaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

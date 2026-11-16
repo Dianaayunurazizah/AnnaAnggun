@@ -311,7 +311,6 @@ public class PanelKas extends javax.swing.JPanel {
         cMahasiswa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dedi Kurnia " }));
 
         tNominal.setText("Rp 10.000");
-        tNominal.addActionListener(this::tNominalActionPerformed);
 
         jLabel15.setForeground(new java.awt.Color(204, 204, 204));
         jLabel15.setText("Tanggal Bayar ");
@@ -455,7 +454,6 @@ public class PanelKas extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/HumbleiconsPrint (1).png"))); // NOI18N
         jButton2.setText("Cetak Daftar Tunggakan");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);

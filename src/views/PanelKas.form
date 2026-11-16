@@ -544,9 +544,6 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Rp 10.000"/>
                               </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tNominalActionPerformed"/>
-                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
@@ -761,9 +758,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cetak Daftar Tunggakan"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
