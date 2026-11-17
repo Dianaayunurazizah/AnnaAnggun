@@ -4,6 +4,7 @@
  */
 package views;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
@@ -227,6 +228,11 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         });
         tPengeluaran.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tPengeluaran.setRowHeight(40);
+        tPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tPengeluaranMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tPengeluaran);
 
         panelRiwayatPengeluaran.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -329,6 +335,26 @@ public class PanelPengeluaran extends javax.swing.JPanel {
         }
         loadTable();
     }//GEN-LAST:event_bUbahActionPerformed
+
+    private void tPengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tPengeluaranMouseClicked
+        // TODO add your handling code here:
+        int baris = tPengeluaran.getSelectedRow();
+
+        String idPemasukan = tPengeluaran.getValueAt(baris, 0).toString();
+        String nominal = tPengeluaran.getValueAt(baris, 1).toString();
+        String tanggal = tPengeluaran.getValueAt(baris, 2).toString();
+        String keterangan = tPengeluaran.getValueAt(baris, 3).toString();
+        String idPengguna = tPengeluaran.getValueAt(baris, 4).toString();
+
+        tID.setText(idPemasukan);
+        tNominal.setText(nominal);
+        try {
+            tTanggal.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tanggal));
+        } catch (ParseException e) {
+            tTanggal.setDate(null);
+        }
+        tKeterangan.setText(keterangan);
+    }//GEN-LAST:event_tPengeluaranMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
