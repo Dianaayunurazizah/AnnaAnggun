@@ -698,7 +698,7 @@ public class PanelLaporan extends javax.swing.JPanel {
         String tanggal = "";
         try {
             tanggal = new SimpleDateFormat("yyyy-MM-dd").format(
-                    new SimpleDateFormat("dd//MM/yyyy").parse(txtTanggal.getText()));
+                    new SimpleDateFormat("dd/MM/yyyy").parse(txtTanggal.getText()));
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "Format tanggal harus dd/MM/yyyy");
             return;
@@ -728,7 +728,7 @@ public class PanelLaporan extends javax.swing.JPanel {
         
         try {
             tanggal = new SimpleDateFormat("yyyy-MM-dd").format(
-                    new SimpleDateFormat("dd//MM/yyyy").parse(txtTanggal.getText()));
+                    new SimpleDateFormat("dd/MM/yyyy").parse(txtTanggal.getText()));
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "Format tanggal harus dd/MM/yyyy");
             return;
