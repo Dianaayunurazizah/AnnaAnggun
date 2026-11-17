@@ -452,6 +452,11 @@ public class PanelPengguna extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tPengguna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tPenggunaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tPengguna);
 
         jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -515,6 +520,22 @@ public class PanelPengguna extends javax.swing.JPanel {
         }
         loadTable();
     }//GEN-LAST:event_bHapusActionPerformed
+
+    private void tPenggunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tPenggunaMouseClicked
+        // TODO add your handling code here:
+        int baris = tPengguna.getSelectedRow();
+        
+        String id  = tPengguna.getValueAt(baris, 0).toString();
+        String username = tPengguna.getValueAt(baris, 1).toString();
+        String nama = tPengguna.getValueAt(baris, 2).toString();
+        String role = tPengguna.getValueAt(baris, 3).toString();
+        
+        tID.setText(id);
+        tNama.setText(nama);
+        tUser.setText(username);
+        cRole.setSelectedItem(role);
+        tPassword.setText("");
+    }//GEN-LAST:event_tPenggunaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
