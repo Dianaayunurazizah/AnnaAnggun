@@ -447,6 +447,7 @@ public class PanelMahasiswa extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Data Tidak Berhasil Disimpan");
         }
+        loadTable();
     }//GEN-LAST:event_bSimpanActionPerformed
 
     private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
